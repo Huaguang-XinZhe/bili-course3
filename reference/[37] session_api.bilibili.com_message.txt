@@ -1,0 +1,61 @@
+GET /pugv/app/web/classifications/new h2
+host: api.bilibili.com
+pragma: no-cache
+cache-control: no-cache
+sec-ch-ua-platform: "Windows"
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+accept: application/json, text/plain, */*
+sec-ch-ua: "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+sec-ch-ua-mobile: ?0
+origin: https://www.bilibili.com
+sec-fetch-site: same-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: https://www.bilibili.com/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: zh-CN,zh-TW;q=0.9,zh;q=0.8
+cookie: buvid3=9EDDA5C6-2956-CE4E-5896-3E3E8A109B2E61248infoc
+cookie: b_nut=1738941461
+cookie: _uuid=C63F7679-C681-ECCA-2EEC-C276DC105CFB1063716infoc
+cookie: buvid_fp=9f4b111b1a9588203d31dbc75acf99fd
+cookie: rpdid=|(ummJYl~u||0J'u~J)mRuRYY
+cookie: buvid4=DE36FE0A-361C-7B31-9D67-75B2FD56DCD267405-025020715-a329irgH2eWKXcmXS76r9Q%3D%3D
+cookie: DedeUserID=3546611267405994
+cookie: DedeUserID__ckMd5=6acf02f51df63735
+cookie: header_theme_version=CLOSE
+cookie: enable_web_push=DISABLE
+cookie: enable_feed_channel=ENABLE
+cookie: CURRENT_QUALITY=80
+cookie: bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDY1NTAxNDMsImlhdCI6MTc0NjI5MDg4MywicGx0IjotMX0.i5MkD4q0Vfg2p4sBOMaWvcFTeKLvUk-Q8oj-lB4PFdU
+cookie: bili_ticket_expires=1746550083
+cookie: SESSDATA=71e6145b%2C1761851623%2C58192%2A52CjA84AcgOFfaiEK5FdSS1s4DcXcGzqVFdqhuDk4jLKMdN3EpeJ1zC8upFderlMZZiVwSVmFqaEcxNEZBNDFnMzhxRWFZTTVIV2MxNVk1RHBuUkNJSFk1S3hKeFJkd2hKOHEyMFBTVGVidmU3ckpwYjYzdHFZTGRJZ0hFTWNPd3p1bmhGdzFoMDhRIIEC
+cookie: bili_jct=524079b9ef559d3b4779c317b4ce0ec0
+cookie: home_feed_column=5
+cookie: browser_resolution=1536-730
+cookie: CURRENT_FNVAL=2000
+cookie: sid=pq27b1o5
+cookie: b_lsid=CB152BE4_19699CC9875
+cookie: bp_t_offset_3546611267405994=1063002052117921792
+priority: u=1, i
+
+
+
+h2 200
+date: Sun, 04 May 2025 06:41:54 GMT
+content-type: application/json
+access-control-allow-credentials: true
+access-control-allow-headers: origin,x-requested-with,content-type,accept,no-cache,if-modified-since,pragma,last-modified,cache-control,expires,access-control-allow-credentials,dnt,x-customheader,keep-alive,user-agent,x-cache-webcdn,x-bilibili-key-real-ip,x-backend-bili-real-ip,x-event-traceid,x-risk-header
+access-control-allow-methods: POST, GET, PATCH, DELETE, PUT
+access-control-allow-origin: https://www.bilibili.com
+access-control-max-age: 3600
+bili-status-code: 0
+x-bili-trace-id: 0ccabf2df3b26ad67051d853a168170c
+x-pugv-trace-id: 0ccabf2df3b26ad67051d853a168170c
+cross-origin-resource-policy: cross-origin
+access-control-expose-headers: x-bili-gaia-vvoucher,x-bili-trace-id,x-bili-gaia-param
+content-encoding: gzip
+expires: Sun, 04 May 2025 06:41:53 GMT
+cache-control: no-cache
+x-cache-webcdn: BYPASS from blzone04
+
+{"code":0,"data":{"classification_list":[{"id":-1,"name":"全部分类","type":0},{"id":95,"name":"通识科普","sub_list":[{"id":-1,"name":"全部","type":0},{"id":142,"name":"人文历史","sub_list":[],"type":2},{"id":140,"name":"社科法律","sub_list":[],"type":2},{"id":139,"name":"科学科普","sub_list":[],"type":2},{"id":144,"name":"商业财经","sub_list":[],"type":2},{"id":141,"name":"心理","sub_list":[],"type":2},{"id":143,"name":"艺术","sub_list":[],"type":2},{"id":197,"name":"经典阅读","sub_list":[],"type":2},{"id":145,"name":"其他","sub_list":[],"type":2}],"type":1},{"id":94,"name":"兴趣生活","sub_list":[{"id":-1,"name":"全部","type":0},{"id":131,"name":"健身","sub_list":[],"type":2},{"id":136,"name":"摄影","sub_list":[],"type":2},{"id":134,"name":"音乐","sub_list":[],"type":2},{"id":223,"name":"体育运动","sub_list":[],"type":2},{"id":133,"name":"手工·书法","sub_list":[],"type":2},{"id":155,"name":"美食","sub_list":[],"type":2},{"id":156,"name":"舞蹈","sub_list":[],"type":2},{"id":135,"name":"游戏娱乐","sub_list":[],"type":2},{"id":132,"name":"时尚美妆","sub_list":[],"type":2},{"id":161,"name":"生活百科","sub_list":[],"type":2},{"id":157,"name":"其他","sub_list":[],"type":2}],"type":1},{"id":93,"name":"语言学习","sub_list":[{"id":-1,"name":"全部","type":0},{"id":127,"name":"英语","sub_list":[],"type":2},{"id":128,"name":"日语","sub_list":[],"type":2},{"id":130,"name":"韩语","sub_list":[],"type":2},{"id":129,"name":"法语","sub_list":[],"type":2},{"id":152,"name":"德语","sub_list":[],"type":2},{"id":159,"name":"西班牙语","sub_list":[],"type":2},{"id":189,"name":"意大利语","sub_list":[],"type":2},{"id":198,"name":"俄语","sub_list":[],"type":2},{"id":203,"name":"留学","sub_list":[],"type":2},{"id":215,"name":"泰语","sub_list":[],"type":2},{"id":190,"name":"其他","sub_list":[],"type":2}],"type":1},{"id":88,"name":"考研","sub_list":[{"id":-1,"name":"全部","type":0},{"id":106,"name":"政治","sub_list":[],"type":2},{"id":104,"name":"英语","sub_list":[],"type":2},{"id":105,"name":"数学","sub_list":[],"type":2},{"id":107,"name":"专业课","sub_list":[],"type":2},{"id":196,"name":"联报","sub_list":[],"type":2},{"id":192,"name":"vip系列","sub_list":[],"type":2},{"id":193,"name":"1v1定制","sub_list":[],"type":2},{"id":108,"name":"规划指导","sub_list":[],"type":2},{"id":163,"name":"复试·调剂","sub_list":[],"type":2},{"id":109,"name":"保研","sub_list":[],"type":2}],"type":1},{"id":87,"name":"考试·考证","sub_list":[{"id":-1,"name":"全部","type":0},{"id":97,"name":"公考","sub_list":[],"type":2},{"id":206,"name":"事业单位","sub_list":[],"type":2},{"id":207,"name":"医疗·医药护","sub_list":[],"type":2},{"id":208,"name":"银行招聘","sub_list":[],"type":2},{"id":101,"name":"大学学科","sub_list":[],"type":2},{"id":99,"name":"四六级","sub_list":[],"type":2},{"id":100,"name":"计算机","sub_list":[],"type":2},{"id":210,"name":"毕业论文","sub_list":[],"type":2},{"id":96,"name":"专升本","sub_list":[],"type":2},{"id":211,"name":"成人学历","sub_list":[],"type":2},{"id":160,"name":"财会金融","sub_list":[],"type":2},{"id":212,"name":"建筑工程","sub_list":[],"type":2},{"id":98,"name":"教资·教招","sub_list":[],"type":2},{"id":158,"name":"法考","sub_list":[],"type":2},{"id":213,"name":"驾考","sub_list":[],"type":2},{"id":103,"name":"其他","sub_list":[],"type":2}],"type":1},{"id":164,"name":"影视·创作","sub_list":[{"id":-1,"name":"全部","type":0},{"id":165,"name":"剪辑·特效","sub_list":[],"type":2},{"id":166,"name":"拍摄","sub_list":[],"type":2},{"id":167,"name":"编剧·导演","sub_list":[],"type":2},{"id":168,"name":"动画·动效","sub_list":[],"type":2},{"id":169,"name":"平面·UI","sub_list":[],"type":2},{"id":170,"name":"游戏设计","sub_list":[],"type":2},{"id":171,"name":"三维·建模","sub_list":[],"type":2},{"id":199,"name":"绘画创作","sub_list":[],"type":2},{"id":200,"name":"CG美术","sub_list":[],"type":2}],"type":1},{"id":89,"name":"IT互联网","sub_list":[{"id":-1,"name":"全部","type":0},{"id":204,"name":"AI","sub_list":[],"type":2},{"id":113,"name":"大数据","sub_list":[],"type":2},{"id":173,"name":"后端·硬件","sub_list":[],"type":2},{"id":110,"name":"前端·移动","sub_list":[],"type":2},{"id":205,"name":"游戏开发","sub_list":[],"type":2},{"id":175,"name":"计算机基础","sub_list":[],"type":2},{"id":176,"name":"UP主成长","sub_list":[],"type":2},{"id":178,"name":"其他","sub_list":[],"type":2},{"id":174,"name":"移动开发","sub_list":[],"type":2},{"id":112,"name":"Java","sub_list":[],"type":2},{"id":114,"name":"测试运维","sub_list":[],"type":2}],"type":1},{"id":92,"name":"职业职场","sub_list":[{"id":-1,"name":"全部","type":0},{"id":151,"name":"职业技能","sub_list":[],"type":2},{"id":125,"name":"职场经验","sub_list":[],"type":2},{"id":216,"name":"职场人际","sub_list":[],"type":2},{"id":124,"name":"办公软件·AI","sub_list":[],"type":2},{"id":126,"name":"面试求职","sub_list":[],"type":2},{"id":179,"name":"副业·创业","sub_list":[],"type":2},{"id":217,"name":"公务员·教师","sub_list":[],"type":2},{"id":222,"name":"产品·运营","sub_list":[],"type":2},{"id":218,"name":"市场·营销","sub_list":[],"type":2},{"id":219,"name":"财会·金融","sub_list":[],"type":2},{"id":220,"name":"律师","sub_list":[],"type":2},{"id":221,"name":"建筑·工程","sub_list":[],"type":2},{"id":191,"name":"其他","sub_list":[],"type":2}],"type":1},{"id":181,"name":"个人成长","sub_list":[{"id":-1,"name":"全部","type":0},{"id":182,"name":"沟通表达","sub_list":[],"type":2},{"id":186,"name":"心理健康","sub_list":[],"type":2},{"id":184,"name":"思维认知","sub_list":[],"type":2},{"id":185,"name":"情感","sub_list":[],"type":2},{"id":183,"name":"人际关系","sub_list":[],"type":2},{"id":188,"name":"经验分享","sub_list":[],"type":2},{"id":187,"name":"写作","sub_list":[],"type":2}],"type":1}],"season_search_cond_type_list":[{"id":-1,"resource_id":0,"src_id":0,"title":"全部服务"},{"id":1,"resource_id":0,"src_id":0,"title":"含直播课"},{"id":2,"resource_id":0,"src_id":0,"title":"含课程群"},{"id":3,"resource_id":0,"src_id":0,"title":"已完结"}],"season_search_filter_type_list":[{"id":-1,"resource_id":0,"src_id":0,"title":"课程类型"},{"id":1,"resource_id":0,"src_id":0,"title":"课堂臻选"},{"id":2,"resource_id":0,"src_id":0,"title":"B站独家"}],"season_search_sort_type_list":[{"id":-1,"resource_id":0,"src_id":0,"title":"综合排序"},{"id":1,"resource_id":0,"src_id":0,"title":"销量最高"},{"id":2,"resource_id":0,"src_id":0,"title":"最新上架"},{"id":3,"resource_id":0,"src_id":0,"title":"售价最低"}]},"message":"success"}
