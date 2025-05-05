@@ -57,6 +57,9 @@ export interface Course {
   subtitle: string;
   up_name: string;
   price_format: string;
+  price_format_show: string;
+  coupon_price_format?: string;
+  coupon_price_format_show?: string;
   ep_count: number;
   ep_count_show: string;
   stat: {
@@ -66,6 +69,16 @@ export interface Course {
   status_label: string;
   user_status: {
     payed: number;
+  };
+  link?: string; // 课程链接
+  season_tag?: number; // 季度标签
+  show_tag?: number; // 显示标签，用于判断是否为独家
+  first_ep_label?: string;
+  first_ep_title?: string;
+  season_selected_rank?: {
+    badge_type: number;
+    season_id: number;
+    show_season_selected_mark_url: string;
   };
 }
 
@@ -236,10 +249,16 @@ export const getCourseList = async (params: QueryParams = {}) => {
     const paginatedCourses = filteredCourses.slice(startIndex, endIndex);
 
     // 为测试目的，当主要数据不足时模拟一些额外推荐
-    const extraRecommendations =
-      paginatedCourses.length < 12
-        ? mockCourses.slice(0, Math.min(6, mockCourses.length))
-        : [];
+    let extraRecommendations: Course[] = [];
+    
+    // 只在第一页显示额外推荐，或者当主要内容不足时
+    if (page === 1 || paginatedCourses.length < pageSize/2) {
+      // 避免重复内容
+      const mainIds = new Set(paginatedCourses.map(course => course.seasonId));
+      extraRecommendations = mockCourses
+        .filter(course => !mainIds.has(course.seasonId))
+        .slice(0, Math.min(6, mockCourses.length));
+    }
 
     return {
       courses: paginatedCourses,
@@ -270,7 +289,7 @@ export const getCourseList = async (params: QueryParams = {}) => {
     );
 
     // 调试输出，查看返回数据结构
-    console.log("API Response:", response);
+    console.log("API Response:", response.data.data.items[0]);
 
     if (response.data.code === 0 && response.data.data) {
       // 获取主要课程列表
@@ -315,9 +334,21 @@ export const getCourseList = async (params: QueryParams = {}) => {
     const endIndex = Math.min(startIndex + pageSize, filteredCourses.length);
     const paginatedCourses = filteredCourses.slice(startIndex, endIndex);
 
+    // 为测试目的，当主要数据不足时模拟一些额外推荐
+    let extraRecommendations: Course[] = [];
+    
+    // 只在第一页显示额外推荐，或者当主要内容不足时
+    if (page === 1 || paginatedCourses.length < pageSize/2) {
+      // 避免重复内容
+      const mainIds = new Set(paginatedCourses.map(course => course.seasonId));
+      extraRecommendations = mockCourses
+        .filter(course => !mainIds.has(course.seasonId))
+        .slice(0, Math.min(6, mockCourses.length));
+    }
+
     return {
       courses: paginatedCourses,
-      extraCourses: paginatedCourses.length < 12 ? mockCourses.slice(0, 6) : [],
+      extraCourses: extraRecommendations,
       pageInfo: {
         num: page,
         size: pageSize,
@@ -343,9 +374,21 @@ export const getCourseList = async (params: QueryParams = {}) => {
     const endIndex = Math.min(startIndex + pageSize, filteredCourses.length);
     const paginatedCourses = filteredCourses.slice(startIndex, endIndex);
 
+    // 为测试目的，当主要数据不足时模拟一些额外推荐
+    let extraRecommendations: Course[] = [];
+    
+    // 只在第一页显示额外推荐，或者当主要内容不足时
+    if (page === 1 || paginatedCourses.length < pageSize/2) {
+      // 避免重复内容
+      const mainIds = new Set(paginatedCourses.map(course => course.seasonId));
+      extraRecommendations = mockCourses
+        .filter(course => !mainIds.has(course.seasonId))
+        .slice(0, Math.min(6, mockCourses.length));
+    }
+
     return {
       courses: paginatedCourses,
-      extraCourses: paginatedCourses.length < 12 ? mockCourses.slice(0, 6) : [],
+      extraCourses: extraRecommendations,
       pageInfo: {
         num: page,
         size: pageSize,

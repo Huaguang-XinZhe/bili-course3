@@ -8,15 +8,15 @@ interface CategoryNavProps {
 
 const CategoryNav: React.FC<CategoryNavProps> = ({ categories, onSelect }) => {
   return (
-    <div className="overflow-hidden">
-      <ul className="flex flex-wrap">
+    <div className="overflow-hidden mb-4">
+      <ul className="flex justify-between w-full">
         {categories.map((category) => (
           <li
             key={category.id}
-            className={`cursor-pointer py-1 px-4 mr-3 mb-3 border rounded-lg text-center transition-colors ${
+            className={`cursor-pointer py-2 px-4 text-center transition-colors relative text-[14px] ${
               category.active
-                ? "border-teal-500 text-teal-500"
-                : "border-neutral-300 text-neutral-600 hover:border-teal-500 hover:text-teal-500"
+                ? "text-[#00A1D6] font-medium after:content-[''] after:absolute after:left-1/2 after:w-8 after:-ml-4 after:bottom-0 after:h-[2px] after:bg-[#00A1D6]"
+                : "text-neutral-600 hover:text-[#00A1D6]"
             }`}
             onClick={() => onSelect(category.id)}
           >

@@ -5,39 +5,55 @@ import ViewToggle from "./ViewToggle";
 
 interface CourseListProps {
   courses: Course[];
+  extraCourses?: Course[];
+  searchWord?: string;
+  listView?: boolean;
+  showViewToggle?: boolean;
+  onToggleView?: () => void;
 }
 
-const CourseList: React.FC<CourseListProps> = ({ courses }) => {
-  const [listView, setListView] = React.useState(false);
-
-  const toggleView = () => {
-    setListView(!listView);
-  };
-
+const CourseList: React.FC<CourseListProps> = ({ 
+  courses, 
+  extraCourses, 
+  searchWord,
+  listView = false,
+  showViewToggle = true,
+  onToggleView 
+}) => {
   return (
     <div>
-      <div className="flex justify-between items-center my-4">
-        <div className="text-neutral-400">共 {courses.length} 个课程</div>
-        <ViewToggle listView={listView} onToggle={toggleView} />
-      </div>
-
-      <div
-        className={`grid ${listView ? "grid-cols-1 gap-4" : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"}`}
-      >
-        {courses.length > 0 ? (
-          courses.map((course) => (
-            <CourseCard
-              key={course.seasonId}
-              course={course}
-              listView={listView}
-            />
-          ))
-        ) : (
-          <div className="col-span-full text-center py-10 text-neutral-400">
-            暂无课程数据
-          </div>
+      <div className="flex justify-end items-center my-4">
+        {showViewToggle && onToggleView && (
+          <ViewToggle listView={listView} onToggle={onToggleView} />
         )}
       </div>
+
+      <div className={`${listView ? "grid grid-cols-2 gap-4" : "grid grid-cols-5 gap-4"}`}>
+        {courses.map((course) => (
+          <CourseCard
+            key={course.seasonId}
+            course={course}
+            listView={listView}
+            searchWord={searchWord}
+          />
+        ))}
+      </div>
+
+      {extraCourses && extraCourses.length > 0 && (
+        <div className="mt-8">
+          <h3 className="text-lg font-medium mb-4">更多推荐</h3>
+          <div className={`${listView ? "grid grid-cols-2 gap-4" : "grid grid-cols-5 gap-4"}`}>
+            {extraCourses.map((course) => (
+              <CourseCard 
+                key={course.seasonId} 
+                course={course} 
+                listView={listView} 
+                searchWord={searchWord}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
