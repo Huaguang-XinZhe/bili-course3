@@ -1,6 +1,6 @@
 import React from "react";
 import CourseCard from "./CourseCard";
-import { Course } from "../../services/api";
+import { Course } from "../../type";
 import ViewToggle from "./ViewToggle";
 
 interface CourseListProps {

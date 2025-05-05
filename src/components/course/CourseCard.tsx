@@ -1,5 +1,5 @@
 import React from "react";
-import { Course } from "../../services/api";
+import { Course } from "../../type";
 
 interface CourseCardProps {
   course: Course;
@@ -7,11 +7,7 @@ interface CourseCardProps {
   searchWord?: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({
-  course,
-  listView,
-  searchWord,
-}) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, listView }) => {
   // 将 HTML 字符串转换为纯文本（去除 <em> 标签）
   const cleanTitle = course.title.replace(/<[^>]*>/g, "");
 
