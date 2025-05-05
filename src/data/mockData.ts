@@ -4,7 +4,7 @@ import {
   SortOption,
   FilterOption,
   ServiceOption,
-} from "../services/api";
+} from "../type";
 
 // 模拟分类数据
 export const mockCategories: Category[] = [
@@ -53,6 +53,7 @@ export const mockCourses: Course[] = [
     subtitle: "系统学习 React ，掌握大厂必备技能",
     up_name: "慕课网官方账号",
     price_format: "299",
+    price_format_show: "299元",
     ep_count: 95,
     ep_count_show: "共95课时",
     stat: {
@@ -72,6 +73,7 @@ export const mockCourses: Course[] = [
     subtitle: "课程为2024徐老师本人最新录制，从基础理论到项目实战全覆盖",
     up_name: "前端徐老师",
     price_format: "358",
+    price_format_show: "358元",
     ep_count: 144,
     ep_count_show: "共144课时",
     stat: {
@@ -91,6 +93,7 @@ export const mockCourses: Course[] = [
     subtitle: "让你拥有完全胜任 React 前端开发工作的技能",
     up_name: "峰华前端工程师",
     price_format: "98",
+    price_format_show: "98元",
     ep_count: 196,
     ep_count_show: "共196课时",
     stat: {
@@ -110,6 +113,7 @@ export const mockCourses: Course[] = [
     subtitle: "为React开发者量身打造的面试指南~",
     up_name: "bubucuo",
     price_format: "179",
+    price_format_show: "179元",
     ep_count: 48,
     ep_count_show: "共48课时",
     stat: {
@@ -129,6 +133,7 @@ export const mockCourses: Course[] = [
     subtitle: "使用 react、electron、ts 开发的桌面软件",
     up_name: "后盾人-前端后端编程",
     price_format: "126",
+    price_format_show: "126元",
     ep_count: 185,
     ep_count_show: "共185课时",
     stat: {
@@ -148,6 +153,7 @@ export const mockCourses: Course[] = [
     subtitle: "React项目实战",
     up_name: "zhang手摸手带你学前端",
     price_format: "39.99",
+    price_format_show: "39.99元",
     ep_count: 20,
     ep_count_show: "共20课时",
     stat: {

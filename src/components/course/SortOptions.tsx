@@ -1,5 +1,5 @@
 import React from "react";
-import { SortOption as ApiSortOption } from "../../services/api";
+import { SortOption as ApiSortOption } from "../../type";
 
 // 扩展 API 中的 SortOption 类型，以适配组件需求
 interface SortOption extends ApiSortOption {
@@ -14,7 +14,9 @@ interface SortOptionsProps {
 const SortOptions: React.FC<SortOptionsProps> = ({ options, onSelect }) => {
   return (
     <div className="flex items-center">
-      <span className="mr-2 text-neutral-500" style={{ fontSize: "12px" }}>排序：</span>
+      <span className="mr-2 text-neutral-500" style={{ fontSize: "12px" }}>
+        排序：
+      </span>
       <div className="flex">
         {options.map((option) => (
           <div

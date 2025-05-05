@@ -6,14 +6,13 @@ import CourseList from "../../components/course/CourseList";
 import Pagination from "../../components/course/Pagination";
 import ViewToggle from "../../components/course/ViewToggle";
 import {
-  getClassifications,
-  getCourseList,
   Category,
   SortOption,
   Course,
   PageInfo,
   QueryParams,
-} from "../../services/api";
+} from "../../type";
+import { getClassifications, getCourseList } from "../../services/api";
 
 const CoursePage: React.FC = () => {
   // 状态管理

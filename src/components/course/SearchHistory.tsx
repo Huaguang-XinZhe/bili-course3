@@ -36,12 +36,12 @@ const SearchHistory: React.FC<SearchHistoryProps> = ({
   const handleRemoveItem = (e: React.MouseEvent, index: number) => {
     e.stopPropagation(); // 阻止冒泡，避免触发onSelect
     e.preventDefault(); // 防止其他事件
-    
+
     // 立即从本地状态中移除，提供即时反馈
     const newHistory = [...localHistory];
     newHistory.splice(index, 1);
     setLocalHistory(newHistory);
-    
+
     // 如果提供了外部删除处理器就使用它，否则使用内部的
     if (onRemoveItem) {
       onRemoveItem(index);
@@ -51,20 +51,13 @@ const SearchHistory: React.FC<SearchHistoryProps> = ({
   };
 
   return (
-    <div
-      className="text-neutral-800 border-b-zinc-200 border-b-2 border-l-zinc-200 border-l-2 border-r-zinc-200 border-r-2 text-xs pb-4 pt-3.5 rounded-lg absolute w-full bg-white z-10 mt-1"
-      style={{
-        borderBottomStyle: "solid",
-        borderLeftStyle: "solid",
-        borderRightStyle: "solid",
-      }}
-    >
+    <div className="text-neutral-800 absolute w-full bg-white z-10 mt-1 rounded-lg shadow-md border border-zinc-200 pb-4 pt-3.5 text-xs">
       <div>
         <div className="items-center justify-between px-4 flex">
-          <div className="text-lg">搜索历史</div>
+          <div className="text-lg font-medium">搜索历史</div>
           {localHistory.length > 0 && (
             <div
-              className="text-zinc-400 cursor-pointer hover:text-zinc-600"
+              className="text-zinc-400 cursor-pointer hover:text-zinc-600 transition-colors"
               onClick={onClear}
             >
               清空
@@ -77,12 +70,12 @@ const SearchHistory: React.FC<SearchHistoryProps> = ({
               {localHistory.map((item, index) => (
                 <div
                   key={`history-${index}-${item}`}
-                  className="bg-neutral-100 cursor-pointer py-2 px-3 rounded hover:bg-neutral-200 relative group transition-colors"
+                  className="bg-neutral-100 cursor-pointer py-2 px-3 rounded-md hover:bg-neutral-200 relative group transition-colors"
                   onClick={() => onSelect(item)}
                   onMouseEnter={() => setHoveredItem(index)}
                   onMouseLeave={() => setHoveredItem(null)}
                 >
-                  <div 
+                  <div
                     className={`text-ellipsis transition-colors ${
                       hoveredItem === index ? "text-[#00A1D6]" : ""
                     }`}
@@ -90,9 +83,9 @@ const SearchHistory: React.FC<SearchHistoryProps> = ({
                     {item}
                   </div>
                   {hoveredItem === index && (
-                    <button 
+                    <button
                       type="button"
-                      className="absolute -top-1 -right-1 bg-white rounded-full w-5 h-5 flex items-center justify-center shadow-sm hover:bg-neutral-200 z-20 cursor-pointer border border-neutral-200"
+                      className="absolute -top-1.5 -right-1.5 bg-white rounded-full w-5 h-5 flex items-center justify-center shadow hover:bg-neutral-200 z-20 cursor-pointer border border-neutral-200 transition-colors"
                       onClick={(e) => handleRemoveItem(e, index)}
                       aria-label="删除"
                     >
