@@ -14,17 +14,17 @@ interface SortOptionsProps {
 const SortOptions: React.FC<SortOptionsProps> = ({ options, onSelect }) => {
   return (
     <div className="flex items-center">
-      <span className="mr-2 text-neutral-500" style={{ fontSize: "12px" }}>
+      <span className="mr-3 text-neutral-500 text-sm font-medium">
         排序：
       </span>
       <div className="flex">
         {options.map((option) => (
           <div
             key={option.id}
-            className={`cursor-pointer mr-4 ${
-              option.active ? "text-[#00A1D6]" : "text-neutral-500"
+            className={`cursor-pointer mr-5 ${
+              option.active ? "text-[#00A1D6] font-medium" : "text-neutral-500"
             }`}
-            style={{ fontSize: "12px" }}
+            style={{ fontSize: "14px" }}
             onClick={() => onSelect(option.id)}
           >
             <span className="transition-colors hover:text-[#00A1D6]">

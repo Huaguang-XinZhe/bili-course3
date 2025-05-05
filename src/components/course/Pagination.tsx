@@ -231,7 +231,7 @@ const Pagination: React.FC<PaginationProps> = ({
             )}
           </div>
           页
-          <span className="ml-1 text-xs text-gray-400">(回车跳转)</span>
+          <span className="ml-1 text-xs text-gray-400"></span>
         </div>
       </div>
     </div>

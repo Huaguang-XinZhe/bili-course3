@@ -1,17 +1,9 @@
 import axios from "axios";
 import {
-  mockCategories,
-  mockSortOptions,
-  mockFilterOptions,
-  mockServiceOptions,
-  mockCourses,
-} from "../data/mockData";
-import {
   Category,
   SortOption,
   FilterOption,
   ServiceOption,
-  Course,
   QueryParams,
   ClassificationsResponse,
   CourseListResponse,
@@ -20,9 +12,6 @@ import {
 
 // API 基础配置
 const API_BASE_URL = "https://api.bilibili.com";
-
-// 使用开发环境变量控制是否使用模拟数据
-const USE_MOCK_DATA = false;
 
 // 分类数据缓存
 let categoryCache: {
@@ -38,17 +27,6 @@ let categoryCache: {
 export const getClassifications = async () => {
   // 如果已有缓存数据，直接返回
   if (categoryCache) {
-    return categoryCache;
-  }
-
-  // 如果使用模拟数据，直接返回模拟数据
-  if (USE_MOCK_DATA) {
-    categoryCache = {
-      categories: mockCategories,
-      sortOptions: mockSortOptions,
-      filterOptions: mockFilterOptions,
-      serviceOptions: mockServiceOptions,
-    };
     return categoryCache;
   }
 
@@ -103,24 +81,10 @@ export const getClassifications = async () => {
       return categoryCache;
     }
 
-    console.warn("获取分类数据失败，使用模拟数据");
-    categoryCache = {
-      categories: mockCategories,
-      sortOptions: mockSortOptions,
-      filterOptions: mockFilterOptions,
-      serviceOptions: mockServiceOptions,
-    };
-    return categoryCache;
+    throw new Error("获取分类数据失败");
   } catch (error) {
     console.error("获取分类数据出错:", error);
-    console.log("使用模拟数据");
-    categoryCache = {
-      categories: mockCategories,
-      sortOptions: mockSortOptions,
-      filterOptions: mockFilterOptions,
-      serviceOptions: mockServiceOptions,
-    };
-    return categoryCache;
+    throw error;
   }
 };
 
@@ -128,48 +92,6 @@ export const getClassifications = async () => {
  * 获取课程列表
  */
 export const getCourseList = async (params: QueryParams = {}) => {
-  // 如果使用模拟数据，直接返回模拟数据
-  if (USE_MOCK_DATA) {
-    // 简单的搜索过滤逻辑
-    let filteredCourses = mockCourses;
-    if (params.word) {
-      filteredCourses = mockCourses.filter((course) =>
-        course.title.toLowerCase().includes(params.word?.toLowerCase() || "")
-      );
-    }
-
-    const pageSize = params.page_size || 30;
-    const page = params.page || 1;
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize, filteredCourses.length);
-    const paginatedCourses = filteredCourses.slice(startIndex, endIndex);
-
-    // 为测试目的，当主要数据不足时模拟一些额外推荐
-    let extraRecommendations: Course[] = [];
-
-    // 只在第一页显示额外推荐，或者当主要内容不足时
-    if (page === 1 || paginatedCourses.length < pageSize / 2) {
-      // 避免重复内容
-      const mainIds = new Set(
-        paginatedCourses.map((course) => course.seasonId)
-      );
-      extraRecommendations = mockCourses
-        .filter((course) => !mainIds.has(course.seasonId))
-        .slice(0, Math.min(6, mockCourses.length));
-    }
-
-    return {
-      courses: paginatedCourses,
-      extraCourses: extraRecommendations,
-      pageInfo: {
-        num: page,
-        size: pageSize,
-        total: filteredCourses.length,
-        next: endIndex < filteredCourses.length,
-      },
-    };
-  }
-
   try {
     // 默认参数
     const defaultParams: Required<QueryParams> = {
@@ -185,9 +107,6 @@ export const getCourseList = async (params: QueryParams = {}) => {
       `${API_BASE_URL}/pugv/app/web/seasonSeek`,
       { params: defaultParams }
     );
-
-    // 调试输出，查看返回数据结构
-    console.log("API Response:", response.data.data.items[0]);
 
     if (response.data.code === 0 && response.data.data) {
       // 获取主要课程列表
@@ -205,10 +124,6 @@ export const getCourseList = async (params: QueryParams = {}) => {
         next: pageData?.next || false,
       };
 
-      console.log(
-        `获取到 ${items.length} 条主要数据，${extraItems.length} 条额外推荐`
-      );
-
       return {
         courses: items,
         extraCourses: extraItems,
@@ -216,87 +131,9 @@ export const getCourseList = async (params: QueryParams = {}) => {
       };
     }
 
-    // 如果请求成功但没有获取到有效数据，使用模拟数据
-    console.warn("获取课程列表失败，使用模拟数据");
-    // 简单的搜索过滤逻辑
-    let filteredCourses = mockCourses;
-    if (params.word) {
-      filteredCourses = mockCourses.filter((course) =>
-        course.title.toLowerCase().includes(params.word?.toLowerCase() || "")
-      );
-    }
-
-    const pageSize = params.page_size || 30;
-    const page = params.page || 1;
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize, filteredCourses.length);
-    const paginatedCourses = filteredCourses.slice(startIndex, endIndex);
-
-    // 为测试目的，当主要数据不足时模拟一些额外推荐
-    let extraRecommendations: Course[] = [];
-
-    // 只在第一页显示额外推荐，或者当主要内容不足时
-    if (page === 1 || paginatedCourses.length < pageSize / 2) {
-      // 避免重复内容
-      const mainIds = new Set(
-        paginatedCourses.map((course) => course.seasonId)
-      );
-      extraRecommendations = mockCourses
-        .filter((course) => !mainIds.has(course.seasonId))
-        .slice(0, Math.min(6, mockCourses.length));
-    }
-
-    return {
-      courses: paginatedCourses,
-      extraCourses: extraRecommendations,
-      pageInfo: {
-        num: page,
-        size: pageSize,
-        total: filteredCourses.length,
-        next: endIndex < filteredCourses.length,
-      },
-    };
+    throw new Error("获取课程列表失败");
   } catch (error) {
     console.error("获取课程列表出错:", error);
-    console.log("使用模拟数据");
-
-    // 简单的搜索过滤逻辑
-    let filteredCourses = mockCourses;
-    if (params.word) {
-      filteredCourses = mockCourses.filter((course) =>
-        course.title.toLowerCase().includes(params.word?.toLowerCase() || "")
-      );
-    }
-
-    const pageSize = params.page_size || 30;
-    const page = params.page || 1;
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize, filteredCourses.length);
-    const paginatedCourses = filteredCourses.slice(startIndex, endIndex);
-
-    // 为测试目的，当主要数据不足时模拟一些额外推荐
-    let extraRecommendations: Course[] = [];
-
-    // 只在第一页显示额外推荐，或者当主要内容不足时
-    if (page === 1 || paginatedCourses.length < pageSize / 2) {
-      // 避免重复内容
-      const mainIds = new Set(
-        paginatedCourses.map((course) => course.seasonId)
-      );
-      extraRecommendations = mockCourses
-        .filter((course) => !mainIds.has(course.seasonId))
-        .slice(0, Math.min(6, mockCourses.length));
-    }
-
-    return {
-      courses: paginatedCourses,
-      extraCourses: extraRecommendations,
-      pageInfo: {
-        num: page,
-        size: pageSize,
-        total: filteredCourses.length,
-        next: endIndex < filteredCourses.length,
-      },
-    };
+    throw error;
   }
 };
