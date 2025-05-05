@@ -69,15 +69,14 @@ const CoursePage: React.FC = () => {
 
         // 不再自动回退到上一页，让界面显示"无数据"提示比突然跳转更好
         // 通过API响应示例我们看到，即使没有主要内容，API也会返回推荐内容
-        
+
         // 设置主要课程列表
         setCourses(data.courses);
         // 设置额外推荐的课程
         setExtraCourses(data.extraCourses || []);
-        
+
         // 直接使用API返回的分页信息
         setPageInfo(data.pageInfo);
-        
       } catch (err) {
         setError("获取课程数据失败");
         console.error(err);
@@ -148,13 +147,23 @@ const CoursePage: React.FC = () => {
     });
   };
 
-  // 判断主要课程是否数量不足
-  const shouldShowExtraCourses = courses.length < 12 && extraCourses.length > 0;
-
   // 切换视图布局
   const toggleView = () => {
     setListView(!listView);
   };
+
+  // 判断是否是第一页
+  const isFirstPage = queryParams.page === 1;
+
+  // 根据页码处理：非第一页且主课程为空时使用推荐课程
+  const displayCourses =
+    isFirstPage || courses.length > 0 ? courses : extraCourses;
+
+  // 决定是否显示推荐区域：只在第一页且有主课程或主课程为空但有推荐课程时显示
+  const shouldShowExtraCourses =
+    isFirstPage &&
+    ((courses.length > 0 && extraCourses.length > 0) ||
+      (courses.length === 0 && extraCourses.length > 0));
 
   return (
     <div className="flex justify-center w-full">
@@ -183,29 +192,33 @@ const CoursePage: React.FC = () => {
           <div className="text-center text-red-500 py-10">{error}</div>
         ) : (
           <>
-            {courses.length > 0 ? (
-              <CourseList 
-                courses={courses} 
+            {displayCourses.length > 0 ? (
+              <CourseList
+                courses={displayCourses}
                 listView={listView}
                 onToggleView={undefined}
                 showViewToggle={false}
                 searchWord={searchKeyword}
               />
-            ) : searchKeyword ? (
+            ) : isFirstPage && searchKeyword ? (
               <div className="text-center py-6 text-gray-500 bg-gray-50 rounded-lg">
-                <div className="text-lg mb-2">没有找到与"{searchKeyword}"相关的课程</div>
-                <div className="text-sm">您可以尝试其他关键词，或查看以下推荐内容</div>
+                <div className="text-lg mb-2">
+                  没有找到与"{searchKeyword}"相关的课程
+                </div>
+                <div className="text-sm">
+                  您可以尝试其他关键词，或查看以下推荐内容
+                </div>
               </div>
             ) : null}
 
-            {/* 显示额外推荐的课程 - 修改逻辑，当主内容为空但有推荐时总是显示 */}
-            {extraCourses.length > 0 && (
-              <div className={`${courses.length > 0 ? 'mt-8' : 'mt-4'}`}>
+            {/* 显示额外推荐的课程 - 仅在第一页显示独立的推荐区域 */}
+            {shouldShowExtraCourses && (
+              <div className={`${courses.length > 0 ? "mt-8" : "mt-4"}`}>
                 <h2 className="text-lg font-medium mb-4 text-neutral-800 border-l-4 border-teal-500 pl-2">
                   {courses.length === 0 ? "推荐课程" : "更多推荐"}
                 </h2>
-                <CourseList 
-                  courses={extraCourses} 
+                <CourseList
+                  courses={extraCourses}
                   listView={listView}
                   showViewToggle={false}
                   onToggleView={undefined}
@@ -215,17 +228,22 @@ const CoursePage: React.FC = () => {
             )}
 
             {/* 当主内容和推荐内容都为空时显示"无内容"提示 */}
-            {courses.length === 0 && extraCourses.length === 0 && searchKeyword && (
-              <div className="text-center py-20 text-gray-500">
-                <div className="text-xl mb-3">暂无内容</div>
-                <div className="text-sm">您可以尝试其他关键词或分类</div>
-              </div>
-            )}
+            {displayCourses.length === 0 &&
+              extraCourses.length === 0 &&
+              searchKeyword && (
+                <div className="text-center py-20 text-gray-500">
+                  <div className="text-xl mb-3">暂无内容</div>
+                  <div className="text-sm">您可以尝试其他关键词或分类</div>
+                </div>
+              )}
 
             {/* 只有当有数据并且总数大于页面大小时才显示分页 */}
             {pageInfo.total > 0 && (
               <Pagination
-                totalPages={Math.max(1, Math.ceil(pageInfo.total / pageInfo.size))}
+                totalPages={Math.max(
+                  1,
+                  Math.ceil(pageInfo.total / pageInfo.size)
+                )}
                 currentPage={pageInfo.num}
                 onPageChange={handlePageChange}
                 className="mt-8"

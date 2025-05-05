@@ -12,13 +12,13 @@ interface CourseListProps {
   onToggleView?: () => void;
 }
 
-const CourseList: React.FC<CourseListProps> = ({ 
-  courses, 
-  extraCourses, 
+const CourseList: React.FC<CourseListProps> = ({
+  courses,
+  extraCourses,
   searchWord,
   listView = false,
   showViewToggle = true,
-  onToggleView 
+  onToggleView,
 }) => {
   return (
     <div>
@@ -28,7 +28,11 @@ const CourseList: React.FC<CourseListProps> = ({
         )}
       </div>
 
-      <div className={`${listView ? "grid grid-cols-2 gap-4" : "grid grid-cols-5 gap-4"}`}>
+      <div
+        className={`${
+          listView ? "grid grid-cols-2 gap-4" : "grid grid-cols-5 gap-4"
+        }`}
+      >
         {courses.map((course) => (
           <CourseCard
             key={course.seasonId}
@@ -42,12 +46,16 @@ const CourseList: React.FC<CourseListProps> = ({
       {extraCourses && extraCourses.length > 0 && (
         <div className="mt-8">
           <h3 className="text-lg font-medium mb-4">更多推荐</h3>
-          <div className={`${listView ? "grid grid-cols-2 gap-4" : "grid grid-cols-5 gap-4"}`}>
+          <div
+            className={`${
+              listView ? "grid grid-cols-2 gap-4" : "grid grid-cols-5 gap-4"
+            }`}
+          >
             {extraCourses.map((course) => (
-              <CourseCard 
-                key={course.seasonId} 
-                course={course} 
-                listView={listView} 
+              <CourseCard
+                key={course.seasonId}
+                course={course}
+                listView={listView}
                 searchWord={searchWord}
               />
             ))}
